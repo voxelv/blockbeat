@@ -4,16 +4,17 @@ var cube_pre = preload("res://main/player_shape/cube.tscn")
 
 var cubes = {}
 
-func place_cube(base:Spatial, pos:Vector3):
+func place_cube(pos:Vector3):
 	var new_cube = cube_pre.instance()
-	new_cube.set_coord_v(base.translation + pos)
+	new_cube.set_coord_v(pos)
 	
 	if not new_cube.coord in cubes.keys():
 		add_child(new_cube)
 		cubes[new_cube.coord] = new_cube
-		new_cube.find_node("area").connect("input_event", self, "_on_cube_area_input_event", [new_cube, pos])
+		return(new_cube)
 	else:
 		new_cube.free()
+		return(null)
 
 func remove_cube(cube:Spatial, pos):
 	var key = null
@@ -39,3 +40,6 @@ func get_face(v_normalized:Vector3):
 			current_best_match = dot
 	return(face)
 
+func set_shape(shape_data):
+	for v in shape_data:
+		pass
