@@ -76,12 +76,14 @@ margin_bottom = 50.0
 [node name="increase_zoom_button" type="Button" parent="Control2/MarginContainer/Control/VBoxContainer"]
 margin_right = 50.0
 margin_bottom = 20.0
+focus_mode = 0
 text = "+"
 
 [node name="decrease_zoom_button" type="Button" parent="Control2/MarginContainer/Control/VBoxContainer"]
 margin_top = 24.0
 margin_right = 50.0
 margin_bottom = 44.0
+focus_mode = 0
 text = "-"
 [connection signal="pressed" from="Control2/MarginContainer/Control/VBoxContainer/increase_zoom_button" to="Control2/MarginContainer/Control/ViewportContainer/Viewport/Spatial/goal_camera" method="_on_increase_zoom_button_pressed"]
 [connection signal="pressed" from="Control2/MarginContainer/Control/VBoxContainer/decrease_zoom_button" to="Control2/MarginContainer/Control/ViewportContainer/Viewport/Spatial/goal_camera" method="_on_decrease_zoom_button_pressed"]

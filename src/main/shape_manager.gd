@@ -41,5 +41,8 @@ func get_face(v_normalized:Vector3):
 	return(face)
 
 func set_shape(shape_data):
+	for pos in cubes.keys():
+		cubes[pos].queue_free()
+		cubes.erase(pos)
 	for v in shape_data:
-		pass
+		place_cube(Vector3(v[0], v[1], v[2]))
