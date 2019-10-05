@@ -23,5 +23,29 @@ func _on_cube_area_input_event(camera, event, click_position, click_normal, shap
 	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT:
 		if event.pressed:
 			print(pos)
-			var cube_local_pos = cube.to_local(click_position)
-			print(cube_local_pos)
+			var cube_local_pos = cube.to_local(click_position).normalized()
+			print(face_str(get_face(cube_local_pos)))
+
+func get_face(v_normalized:Vector3):
+	var face = Vector3.ZERO
+	var current_best_match = -1
+	for v in [Vector3.RIGHT, Vector3.LEFT, Vector3.UP, Vector3.DOWN, Vector3.FORWARD, Vector3.BACK]:
+		var dot = v_normalized.dot(v)
+		if dot > current_best_match:
+			face = v
+			current_best_match = dot
+	return(face)
+
+func face_str(v):
+	if v == Vector3.LEFT:
+		return("LEFT")
+	elif v == Vector3.RIGHT:
+		return("RIGHT")
+	elif v == Vector3.UP:
+		return("UP")
+	elif v == Vector3.DOWN:
+		return("DOWN")
+	elif v == Vector3.FORWARD:
+		return("FORWARD")
+	elif v == Vector3.BACK:
+		return("BACK")
