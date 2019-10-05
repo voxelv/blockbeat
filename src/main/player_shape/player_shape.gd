@@ -20,6 +20,13 @@ func place_cube(base:Spatial, pos:Vector3):
 	add_child(new_cube)
 	new_cube.find_node("area").connect("input_event", self, "_on_cube_area_input_event", [new_cube, pos])
 
+func _unhandled_input(event):
+	if event is InputEventMouseButton:
+		if event.button_index == BUTTON_LEFT:
+			if event.pressed:
+				if get_child_count() <= 0:
+					place_cube(self, Vector3(0, 0, 0))
+
 func _on_cube_area_input_event(camera, event, click_position, click_normal, shape_idx, cube:Spatial, pos:Vector3):
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT:
