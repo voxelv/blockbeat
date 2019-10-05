@@ -17,7 +17,10 @@ _global_script_class_icons={
 
 config/name="blockbeat"
 run/main_scene="res://main/main.tscn"
-config/icon="res://icon.png"
+
+[autoload]
+
+shapes_lib="*res://util/autoload/shapes_lib.gd"
 
 [input]
 
