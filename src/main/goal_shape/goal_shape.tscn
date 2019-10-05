@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://main/goal_shape/goal_shape.gd" type="Script" id=1]
+
+[node name="goal_shape" type="Spatial"]
+script = ExtResource( 1 )

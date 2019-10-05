@@ -6,7 +6,7 @@
 [ext_resource path="res://main/player_shape/player_shape.tscn" type="PackedScene" id=4]
 [ext_resource path="res://black_environment.tres" type="Environment" id=5]
 [ext_resource path="res://main/goal_shape/goal_camera.tscn" type="PackedScene" id=6]
-[ext_resource path="res://main/player_shape/cube.tscn" type="PackedScene" id=7]
+[ext_resource path="res://main/goal_shape/goal_shape.tscn" type="PackedScene" id=7]
 
 [sub_resource type="World" id=1]
 
@@ -67,7 +67,7 @@ environment = ExtResource( 5 )
 
 [node name="goal_camera" parent="Control2/MarginContainer/Control/ViewportContainer/Viewport/Spatial" instance=ExtResource( 6 )]
 
-[node name="MeshInstance" parent="Control2/MarginContainer/Control/ViewportContainer/Viewport/Spatial" instance=ExtResource( 7 )]
+[node name="goal_shape" parent="Control2/MarginContainer/Control/ViewportContainer/Viewport/Spatial" instance=ExtResource( 7 )]
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Control2/MarginContainer/Control"]
 margin_right = 50.0
