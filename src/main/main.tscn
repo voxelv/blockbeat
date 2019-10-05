@@ -9,5 +9,6 @@ script = ExtResource( 1 )
 
 [node name="cam" parent="." instance=ExtResource( 2 )]
 mouse_control = true
+max_zoom = 7.0
 
 [node name="player_shape" parent="." instance=ExtResource( 3 )]
