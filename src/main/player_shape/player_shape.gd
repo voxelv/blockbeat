@@ -1,5 +1,14 @@
 extends "res://main/shape_manager.gd"
 
+func _process(delta):
+	if Input.is_action_just_pressed("show_shape"):
+		var s = ""
+		for i in range(len(cubes.keys())):
+			if i > 0:
+				s += ","
+			s += str(cubes.keys()[i])
+		print(s)
+
 func _unhandled_input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT:
