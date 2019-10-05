@@ -1,0 +1,11 @@
+[gd_scene format=2]
+
+[node name="Lighting" type="Spatial"]
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 0.677826, -0.259441, 0.687926, 0, 0.935671, 0.352875, -0.735222, -0.239188, 0.634222, 0, 3.34736, 0 )
+light_energy = 1.2
+
+[node name="DirectionalLight2" type="DirectionalLight" parent="."]
+transform = Transform( -0.762967, -0.270763, -0.587, 0, 0.908054, -0.418854, 0.646437, -0.319572, -0.692815, 0, 5, 0 )
+light_energy = 0.75
