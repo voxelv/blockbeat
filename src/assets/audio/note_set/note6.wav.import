@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/note6.wav-a600e7beb4544014db43f0e56964eb66.sample"
+
+[deps]
+
+source_file="res://assets/audio/note_set/note6.wav"
+dest_files=[ "res://.import/note6.wav-a600e7beb4544014db43f0e56964eb66.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

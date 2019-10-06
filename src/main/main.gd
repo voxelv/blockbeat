@@ -9,22 +9,45 @@ onready var goal_camera = find_node("goal_camera") as _goal_camera_pre
 onready var player_camera = find_node("player_camera") as _player_camera_pre
 onready var boundary = find_node("boundary") as _boundary_pre
 onready var animation = find_node("animation") as AnimationPlayer
+onready var arp = find_node("arp")
+var note_players:Array
 
 var size_to_set = shapes_lib.SIZE.THREE
 
 func _ready():
 	randomize()
+	
+	note_players = find_node("notes").get_children()
+	
 	animation.connect("animation_finished", self, "_on_animation_finished")
 	animation.play("goal_cam_up")
 	next_shape()
 	player_shape.connect("cubes_changed", self, "_on_player_shape_cubes_changed")
+
+func next_note():
+	stop_notes()
+	note_players[randi()%len(note_players)].play()
+
+func stop_notes():
+	for a in note_players:
+		a.stop()
+
+func play_arp():
+	stop_notes()
+	arp.play()
+
+func stop_arp():
+	arp.stop()
 
 func _process(delta):
 	if Input.is_action_just_pressed("ui_accept"):
 		next_shape()
 
 func _on_player_shape_cubes_changed():
+	next_note()
 	if shapes_lib.shapes_match(player_shape.cubes.keys(), goal_shape.cubes.keys()):
+		stop_notes()
+		play_arp()
 		next_shape()
 
 func next_shape():
@@ -46,3 +69,5 @@ func _on_animation_finished(anim_name:String):
 		player_camera.set_scale(Vector3.ONE * 1.6)
 		player_camera.zoom = 1.6
 		player_shape.enable_input()
+		stop_arp()
+		next_note()

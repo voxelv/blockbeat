@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/note5.wav-129e2b256312076d5fbd75dc10129a0d.sample"
+
+[deps]
+
+source_file="res://assets/audio/note_set/note5.wav"
+dest_files=[ "res://.import/note5.wav-129e2b256312076d5fbd75dc10129a0d.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0
