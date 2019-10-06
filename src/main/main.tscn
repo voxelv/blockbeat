@@ -3,7 +3,7 @@
 [ext_resource path="res://main/main.gd" type="Script" id=1]
 [ext_resource path="res://util/gizmo.tscn" type="PackedScene" id=2]
 [ext_resource path="res://main/lighting.tscn" type="PackedScene" id=3]
-[ext_resource path="res://main/main_camera.tscn" type="PackedScene" id=4]
+[ext_resource path="res://main/player_camera.tscn" type="PackedScene" id=4]
 [ext_resource path="res://main/player_shape/player_shape.tscn" type="PackedScene" id=5]
 [ext_resource path="res://main/boundary/boundary.tscn" type="PackedScene" id=6]
 [ext_resource path="res://black_environment.tres" type="Environment" id=7]
@@ -44,6 +44,18 @@ tracks/0/keys = {
 "update": 0,
 "values": [ 50.0, 0.9 ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("player_camera:zoom")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.7, 50.0 ]
+}
 
 [node name="main" type="Node"]
 script = ExtResource( 1 )
@@ -53,9 +65,9 @@ visible = false
 
 [node name="Lighting" parent="." instance=ExtResource( 3 )]
 
-[node name="cam" parent="." instance=ExtResource( 4 )]
+[node name="player_camera" parent="." instance=ExtResource( 4 )]
 mouse_control = true
-max_zoom = 7.0
+zoom = 50.0
 
 [node name="player_shape" parent="." instance=ExtResource( 5 )]
 
@@ -71,7 +83,6 @@ anchor_bottom = 1.0
 mouse_filter = 2
 
 [node name="Control2" type="Control" parent="Control"]
-editor/display_folded = true
 margin_right = 254.0
 margin_bottom = 254.0
 rect_min_size = Vector2( 254, 254 )

@@ -9,11 +9,11 @@ export (bool) var invert_y = false
 export (bool) var invert_x = false
 
 # zoom settings
-export (float) var max_zoom = 3.0
+export (float) var max_zoom = 7.0
 export (float) var min_zoom = 0.4
 export (float, 0.05, 1.0) var zoom_speed = 0.09
 
-var zoom = (max_zoom - min_zoom) / 2.0 + min_zoom
+export (float) var zoom = (max_zoom - min_zoom) / 2.0 + min_zoom
 
 func _init():
 	scale = Vector3.ONE * zoom

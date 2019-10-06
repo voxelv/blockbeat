@@ -2,9 +2,11 @@ extends Node
 const _shape_manager_pre = preload("res://main/shape_manager.gd")
 const _goal_camera_pre = preload("res://main/goal_shape/goal_camera.gd")
 const _boundary_pre = preload("res://main/boundary/boundary.gd")
+const _player_camera_pre = preload("res://main/player_camera.gd")
 onready var goal_shape = find_node("goal_shape") as _shape_manager_pre
 onready var player_shape = find_node("player_shape") as _shape_manager_pre
 onready var goal_camera = find_node("goal_camera") as _goal_camera_pre
+onready var player_camera = find_node("player_camera") as _player_camera_pre
 onready var boundary = find_node("boundary") as _boundary_pre
 onready var animation = find_node("animation") as AnimationPlayer
 
@@ -20,11 +22,13 @@ func _ready():
 func _process(delta):
 	if Input.is_action_just_pressed("ui_accept"):
 		next_shape()
+	if Input.is_action_just_pressed("show_shape"):
+		print(player_camera.scale)
+		print(player_camera.zoom)
 
 func _on_player_shape_cubes_changed():
 	if shapes_lib.shapes_match(player_shape.cubes.keys(), goal_shape.cubes.keys()):
 		next_shape()
-		player_shape.set_shape(shapes_lib.NULL_SHAPE)
 
 func next_shape():
 	player_shape.disable_input()
@@ -41,4 +45,7 @@ func _on_animation_finished(anim_name:String):
 		size_to_set = size
 	elif anim_name == "goal_cam_up":
 		goal_camera.set_zoom_for_size(size_to_set)
+		player_shape.set_shape(shapes_lib.NULL_SHAPE)
+		player_camera.set_scale(Vector3.ONE * 1.6)
+		player_camera.zoom = 1.6
 		player_shape.enable_input()
