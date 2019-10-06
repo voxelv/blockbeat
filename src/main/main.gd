@@ -22,9 +22,6 @@ func _ready():
 func _process(delta):
 	if Input.is_action_just_pressed("ui_accept"):
 		next_shape()
-	if Input.is_action_just_pressed("show_shape"):
-		print(player_camera.scale)
-		print(player_camera.zoom)
 
 func _on_player_shape_cubes_changed():
 	if shapes_lib.shapes_match(player_shape.cubes.keys(), goal_shape.cubes.keys()):

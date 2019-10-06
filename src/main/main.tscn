@@ -161,6 +161,7 @@ custom_fonts/font = SubResource( 2 )
 text = "Left Mouse: Place Cube
 Right Mouse: Remove Cube
 Middle Mouse: Orbit Camera"
+uppercase = true
 
 [node name="animation" type="AnimationPlayer" parent="."]
 anims/goal_cam_down = SubResource( 3 )
