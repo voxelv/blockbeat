@@ -78,3 +78,7 @@ func _on_animation_finished(anim_name:String):
 		player_shape.enable_input()
 		stop_arp()
 		next_note()
+
+
+func _on_audio_enabled_toggled(button_pressed):
+	AudioServer.set_bus_mute(1, !button_pressed)
