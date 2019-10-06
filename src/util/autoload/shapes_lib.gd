@@ -66,7 +66,12 @@ func shapes_match(shape1:Array, shape2:Array):
 		return(false)
 
 	var matched = true
-	for pos1 in shape1:
+	var filled_positions = []
+	for i in range(len(shape1)):
+		filled_positions.append(i)
+	for i in range(len(shape1)):
+		var pos1 = shape1[i]
+		
 		# 4 rotations
 		var p1 = [ pos1[COORD.X], pos1[COORD.Y],  pos1[COORD.Z]]
 		var p2 = [ pos1[COORD.X], pos1[COORD.Y], -pos1[COORD.Z]]
@@ -88,6 +93,11 @@ func shapes_match(shape1:Array, shape2:Array):
 		if not (b1 or b2 or b3 or b4 or b5 or b6 or b7 or b8):
 			matched = false
 			break
+		else:
+			filled_positions[i] = true
+	for i in range(len(filled_positions)):
+		if not filled_positions[i]:
+			matched = false
 	return matched
 
 func pos_in_shape(pos:Array, shape:Array):
