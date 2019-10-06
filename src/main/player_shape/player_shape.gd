@@ -1,5 +1,7 @@
 extends "res://main/shape_manager.gd"
 
+var input_enabled = true
+
 func _process(delta):
 	if Input.is_action_just_pressed("show_shape"):
 		var s = ""
@@ -10,6 +12,8 @@ func _process(delta):
 		print(s)
 
 func _unhandled_input(event):
+	if not input_enabled:
+		return
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT:
 			if !event.pressed:
@@ -19,6 +23,8 @@ func _unhandled_input(event):
 					register_cube_click_signal(new_cube, pos)
 
 func _on_cube_area_input_event(camera, event, click_position, click_normal, shape_idx, cube:Spatial, pos:Vector3):
+	if not input_enabled:
+		return
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT:
 			if event.pressed:
@@ -30,6 +36,12 @@ func _on_cube_area_input_event(camera, event, click_position, click_normal, shap
 		elif event.button_index == BUTTON_RIGHT:
 			if !event.pressed:
 				remove_cube(cube, null)
+
+func enable_input():
+	input_enabled = true
+	
+func disable_input():
+	input_enabled = false
 
 func register_cube_click_signal(new_cube:Spatial, pos:Vector3):
 	if new_cube:

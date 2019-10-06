@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://main/main.gd" type="Script" id=1]
 [ext_resource path="res://util/gizmo.tscn" type="PackedScene" id=2]
@@ -11,6 +11,36 @@
 [ext_resource path="res://main/goal_shape/goal_shape.tscn" type="PackedScene" id=9]
 
 [sub_resource type="World" id=1]
+
+[sub_resource type="Animation" id=2]
+resource_name = "goal_cam_down"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Control2/MarginContainer/Control/ViewportContainer/Viewport/Spatial/goal_camera:zoom")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.9, 50.0 ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "goal_cam_up"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Control2/MarginContainer/Control/ViewportContainer/Viewport/Spatial/goal_camera:zoom")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 50.0, 0.9 ]
+}
 
 [node name="main" type="Node"]
 script = ExtResource( 1 )
@@ -27,12 +57,12 @@ max_zoom = 7.0
 [node name="player_shape" parent="." instance=ExtResource( 5 )]
 
 [node name="boundary" parent="." instance=ExtResource( 6 )]
+visible = false
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource( 7 )
 
 [node name="Control2" type="Control" parent="."]
-editor/display_folded = true
 margin_right = 254.0
 margin_bottom = 254.0
 rect_min_size = Vector2( 254, 254 )
@@ -74,6 +104,7 @@ environment = ExtResource( 7 )
 [node name="Lighting" parent="Control2/MarginContainer/Control/ViewportContainer/Viewport/Spatial" instance=ExtResource( 3 )]
 
 [node name="goal_camera" parent="Control2/MarginContainer/Control/ViewportContainer/Viewport/Spatial" instance=ExtResource( 8 )]
+zoom = 0.9
 
 [node name="goal_shape" parent="Control2/MarginContainer/Control/ViewportContainer/Viewport/Spatial" instance=ExtResource( 9 )]
 
@@ -98,5 +129,9 @@ margin_right = 50.0
 margin_bottom = 44.0
 focus_mode = 0
 text = "-"
+
+[node name="animation" type="AnimationPlayer" parent="."]
+anims/goal_cam_down = SubResource( 2 )
+anims/goal_cam_up = SubResource( 3 )
 [connection signal="pressed" from="Control2/MarginContainer/Control/VBoxContainer/increase_zoom_button" to="Control2/MarginContainer/Control/ViewportContainer/Viewport/Spatial/goal_camera" method="_on_increase_zoom_button_pressed"]
 [connection signal="pressed" from="Control2/MarginContainer/Control/VBoxContainer/decrease_zoom_button" to="Control2/MarginContainer/Control/ViewportContainer/Viewport/Spatial/goal_camera" method="_on_decrease_zoom_button_pressed"]
