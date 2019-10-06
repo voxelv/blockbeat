@@ -13,16 +13,23 @@ onready var arp = find_node("arp")
 var note_players:Array
 
 var size_to_set = shapes_lib.SIZE.THREE
+var current_note = 0
 
 func _ready():
 	randomize()
 	
 	note_players = find_node("notes").get_children()
+	for i in range(len(note_players)):
+		note_players[i].connect("finished", self, "_on_note_finished", [i])
 	
 	animation.connect("animation_finished", self, "_on_animation_finished")
 	animation.play("goal_cam_up")
 	next_shape()
 	player_shape.connect("cubes_changed", self, "_on_player_shape_cubes_changed")
+
+func _on_note_finished(i:int):
+	note_players[i].stop()
+	note_players[i].play()
 
 func next_note():
 	stop_notes()

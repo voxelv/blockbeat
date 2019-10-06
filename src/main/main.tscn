@@ -175,7 +175,6 @@ anims/goal_cam_down = SubResource( 3 )
 anims/goal_cam_up = SubResource( 4 )
 
 [node name="notes" type="Node" parent="."]
-editor/display_folded = true
 
 [node name="note1" type="AudioStreamPlayer" parent="notes"]
 stream = ExtResource( 11 )
@@ -203,5 +202,6 @@ bus = "notes"
 
 [node name="arp" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 17 )
+bus = "notes"
 [connection signal="pressed" from="Control/Control2/MarginContainer/Control/VBoxContainer/increase_zoom_button" to="Control/Control2/MarginContainer/Control/ViewportContainer/Viewport/Spatial/goal_camera" method="_on_increase_zoom_button_pressed"]
 [connection signal="pressed" from="Control/Control2/MarginContainer/Control/VBoxContainer/decrease_zoom_button" to="Control/Control2/MarginContainer/Control/ViewportContainer/Viewport/Spatial/goal_camera" method="_on_decrease_zoom_button_pressed"]
