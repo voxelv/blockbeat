@@ -21,7 +21,7 @@ func _on_player_shape_cubes_changed():
 
 func next_shape():
 #	var size = shapes_lib.SIZE.values()[randi() % (shapes_lib.SIZE.keys().size()-1) + 1]
-	var size = shapes_lib.SIZE.FIVE
+	var size = shapes_lib.SIZE.THREE
 	var shape_list = shapes_lib.shapes[size]
 	var shape_data = shape_list[shape_list.keys()[randi() % len(shape_list.keys())]]
 	goal_shape.set_shape(shape_data)

@@ -19,7 +19,7 @@ var _shapes_3 = {
 #	4: [[0, 1, -1],[-1, 1, 0],[-1, -1, 0],[0, -1, -1],[1, 0, -1],[-1, 0, -1],[-1, 0, 1],[1, 0, 1],[1, 1, 0],[0, 1, 1],[1, -1, 0],[0, -1, 1]],
 #	5: [[-1, -1, -1],[1, -1, -1],[1, -1, 1],[-1, -1, 1],[1, 1, -1],[-1, 1, 1],[1, 1, 1],[-1, 1, -1]],
 #	6: [[1, 0, -1],[-1, 0, -1],[1, 0, 1],[-1, 0, 1],[0, 1, 0],[0, -1, 0]],
-#	7: [[0, 1, 0],[-1, 0, 0],[0, 0, -1],[1, -1, 1]],
+	7: [[0, 1, 0],[-1, 0, 0],[0, 0, -1],[1, -1, 1]],
 #	8: [[1, -1, 1],[-1, 0, -1],[0, 1, -1],[-1, 1, 0],[-1, 1, -1],[1, -1, 0],[1, 0, 1],[0, -1, 1]],
 #	9: [[-1, 0, 0],[0, -1, 0],[1, 0, 0],[0, 0, 0],[0, 1, 0]],
 }
@@ -27,7 +27,7 @@ var _shapes_3 = {
 var _shapes_5 = {
 #	0: [[-1, 0, 0],[0, -1, 0],[1, 0, 0],[0, 0, 0],[0, 1, 0],[0, 0, 1],[0, 0, 2],[2, 0, 0],[0, 0, -1],[0, 0, -2],[0, -2, 0],[-2, 0, 0],[0, 2, 0]],
 #	1: [[0, 0, 2],[2, 0, 0],[0, 0, -2],[0, -2, 0],[0, 2, 0],[2, 0, 2],[2, 0, -2],[-2, 0, -2],[-2, 0, 0],[-2, 0, 2]],
-	2: [[0, 0, 2],[0, 0, -2],[0, -2, 0],[0, 2, 0],[0, 0, 0],[0, 2, 1],[0, 2, 2],[0, 1, 2],[0, 2, -1],[0, 2, -2],[0, 1, -2],[0, -1, 2],[0, -2, 2],[0, -2, 1],[0, -2, -1],[0, -1, -2],[0, -2, -2]],
+#	2: [[0, 0, 2],[0, 0, -2],[0, -2, 0],[0, 2, 0],[0, 0, 0],[0, 2, 1],[0, 2, 2],[0, 1, 2],[0, 2, -1],[0, 2, -2],[0, 1, -2],[0, -1, 2],[0, -2, 2],[0, -2, 1],[0, -2, -1],[0, -1, -2],[0, -2, -2]],
 #	3: [[0, 0, 2],[0, 0, -2],[0, -2, 0],[0, 2, 0],[0, 2, 1],[0, 1, 2],[0, 2, -1],[0, 1, -2],[0, -1, 2],[0, -2, 1],[0, -2, -1],[0, -1, -2],[1, 0, -2],[2, 0, -1],[2, 0, 0],[2, 0, 1],[1, 0, 2],[-1, 0, -2],[-2, 0, -1],[-2, 0, 0],[-2, 0, 1],[-1, 0, 2],[-1, 2, 0],[-2, 1, 0],[-1, -2, 0],[-2, -1, 0],[1, -2, 0],[2, -1, 0],[2, 1, 0],[1, 2, 0]],
 #	4: [[0, 0, 0],[0, -2, 0],[0, 2, 0],[0, 1, 0],[-1, 1, 0],[1, 1, 0],[0, -1, 0]],
 #	5: [[-1, 2, 0],[1, 2, 0],[-2, -1, 0],[-1, -2, 0],[0, -2, 0],[1, -2, 0],[2, -1, 0],[-1, 1, 0],[1, 1, 0]],
@@ -53,7 +53,7 @@ var _shapes_7 = {
 #var shapes_9 = {}
 
 var shapes = {
-	SIZE.NONE:[[]],
+	SIZE.NONE:{0:[]},
 	SIZE.THREE:_shapes_3,
 	SIZE.FIVE:_shapes_5,
 	SIZE.SEVEN: _shapes_7,
@@ -64,22 +64,38 @@ func shapes_match(shape1:Array, shape2:Array):
 	
 	if len(shape1) != len(shape2):
 		return(false)
-	
+
 	var matched = true
 	for pos1 in shape1:
 		# 4 rotations
 		var p1 = [ pos1[COORD.X], pos1[COORD.Y],  pos1[COORD.Z]]
 		var p2 = [ pos1[COORD.X], pos1[COORD.Y], -pos1[COORD.Z]]
 		var p3 = [-pos1[COORD.X], pos1[COORD.Y],  pos1[COORD.Z]]
-		var p4 = [ pos1[COORD.Z], pos1[COORD.Y],  pos1[COORD.X]]
-		var b1 = p1 in shape2
-		var b2 = p2 in shape2
-		var b3 = p3 in shape2
-		var b4 = p4 in shape2
+		var p4 = [-pos1[COORD.X], pos1[COORD.Y], -pos1[COORD.Z]]
+		var p5 = [ pos1[COORD.Z], pos1[COORD.Y],  pos1[COORD.X]]
+		var p6 = [ pos1[COORD.Z], pos1[COORD.Y], -pos1[COORD.X]]
+		var p7 = [-pos1[COORD.Z], pos1[COORD.Y],  pos1[COORD.X]]
+		var p8 = [-pos1[COORD.Z], pos1[COORD.Y], -pos1[COORD.X]]
+		var b1 = pos_in_shape(p1, shape2)
+		var b2 = pos_in_shape(p2, shape2)
+		var b3 = pos_in_shape(p3, shape2)
+		var b4 = pos_in_shape(p4, shape2)
+		var b5 = pos_in_shape(p5, shape2)
+		var b6 = pos_in_shape(p6, shape2)
+		var b7 = pos_in_shape(p7, shape2)
+		var b8 = pos_in_shape(p8, shape2)
 
-		if not (b1 or b2 or b3 or b4):
+		if not (b1 or b2 or b3 or b4 or b5 or b6 or b7 or b8):
 			matched = false
 			break
-		print("MATCH" if matched else "MISMATCH")
-		print("----------")
 	return matched
+
+func pos_in_shape(pos:Array, shape:Array):
+	var in_shape = false
+	var found_point:Array
+	for p in shape:
+		if p[COORD.X] == pos[COORD.X] and p[COORD.Y] == pos[COORD.Y] and p[COORD.Z] == pos[COORD.Z]:
+			in_shape = true
+			found_point = p
+	return(in_shape)
+		
