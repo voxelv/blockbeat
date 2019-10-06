@@ -1,28 +1,32 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://main/main.gd" type="Script" id=1]
-[ext_resource path="res://main/lighting.tscn" type="PackedScene" id=2]
-[ext_resource path="res://main/main_camera.tscn" type="PackedScene" id=3]
-[ext_resource path="res://main/player_shape/player_shape.tscn" type="PackedScene" id=4]
-[ext_resource path="res://black_environment.tres" type="Environment" id=5]
-[ext_resource path="res://main/goal_shape/goal_camera.tscn" type="PackedScene" id=6]
-[ext_resource path="res://main/goal_shape/goal_shape.tscn" type="PackedScene" id=7]
+[ext_resource path="res://util/gizmo.tscn" type="PackedScene" id=2]
+[ext_resource path="res://main/lighting.tscn" type="PackedScene" id=3]
+[ext_resource path="res://main/main_camera.tscn" type="PackedScene" id=4]
+[ext_resource path="res://main/player_shape/player_shape.tscn" type="PackedScene" id=5]
+[ext_resource path="res://black_environment.tres" type="Environment" id=6]
+[ext_resource path="res://main/goal_shape/goal_camera.tscn" type="PackedScene" id=7]
+[ext_resource path="res://main/goal_shape/goal_shape.tscn" type="PackedScene" id=8]
 
 [sub_resource type="World" id=1]
 
 [node name="main" type="Node"]
 script = ExtResource( 1 )
 
-[node name="Lighting" parent="." instance=ExtResource( 2 )]
+[node name="gizmo" parent="." instance=ExtResource( 2 )]
+visible = false
 
-[node name="cam" parent="." instance=ExtResource( 3 )]
+[node name="Lighting" parent="." instance=ExtResource( 3 )]
+
+[node name="cam" parent="." instance=ExtResource( 4 )]
 mouse_control = true
 max_zoom = 7.0
 
-[node name="player_shape" parent="." instance=ExtResource( 4 )]
+[node name="player_shape" parent="." instance=ExtResource( 5 )]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = ExtResource( 5 )
+environment = ExtResource( 6 )
 
 [node name="Control2" type="Control" parent="."]
 margin_right = 254.0
@@ -59,15 +63,18 @@ handle_input_locally = false
 render_target_update_mode = 3
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Control2/MarginContainer/Control/ViewportContainer/Viewport"]
-environment = ExtResource( 5 )
+environment = ExtResource( 6 )
 
 [node name="Spatial" type="Spatial" parent="Control2/MarginContainer/Control/ViewportContainer/Viewport"]
 
-[node name="Lighting" parent="Control2/MarginContainer/Control/ViewportContainer/Viewport/Spatial" instance=ExtResource( 2 )]
+[node name="Lighting" parent="Control2/MarginContainer/Control/ViewportContainer/Viewport/Spatial" instance=ExtResource( 3 )]
 
-[node name="goal_camera" parent="Control2/MarginContainer/Control/ViewportContainer/Viewport/Spatial" instance=ExtResource( 6 )]
+[node name="goal_camera" parent="Control2/MarginContainer/Control/ViewportContainer/Viewport/Spatial" instance=ExtResource( 7 )]
 
-[node name="goal_shape" parent="Control2/MarginContainer/Control/ViewportContainer/Viewport/Spatial" instance=ExtResource( 7 )]
+[node name="goal_shape" parent="Control2/MarginContainer/Control/ViewportContainer/Viewport/Spatial" instance=ExtResource( 8 )]
+
+[node name="gizmo" parent="Control2/MarginContainer/Control/ViewportContainer/Viewport/Spatial" instance=ExtResource( 2 )]
+visible = false
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Control2/MarginContainer/Control"]
 margin_right = 50.0

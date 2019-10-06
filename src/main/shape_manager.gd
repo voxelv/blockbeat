@@ -1,5 +1,7 @@
 extends Spatial
 
+signal cubes_changed
+
 var cube_pre = preload("res://main/player_shape/cube.tscn")
 
 var cubes = {}
@@ -11,6 +13,7 @@ func place_cube(pos:Vector3):
 	if not new_cube.coord in cubes.keys():
 		add_child(new_cube)
 		cubes[new_cube.coord] = new_cube
+		emit_signal("cubes_changed")
 		return(new_cube)
 	else:
 		new_cube.free()
@@ -25,10 +28,12 @@ func remove_cube(cube:Spatial, pos):
 		var delete_cube = cubes[cube.coord]
 		cubes.erase(cube.coord)
 		delete_cube.queue_free()
+		emit_signal("cubes_changed")
 	elif key and key in cubes.keys():
 		var delete_cube = cubes[key] as Spatial
 		cubes.erase(key)
 		delete_cube.queue_free()
+		emit_signal("cubes_changed")
 
 func get_face(v_normalized:Vector3):
 	var face = Vector3.ZERO
@@ -46,3 +51,6 @@ func set_shape(shape_data):
 		cubes.erase(pos)
 	for v in shape_data:
 		place_cube(Vector3(v[0], v[1], v[2]))
+
+
+
