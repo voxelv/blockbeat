@@ -1,13 +1,14 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://main/main.gd" type="Script" id=1]
 [ext_resource path="res://util/gizmo.tscn" type="PackedScene" id=2]
 [ext_resource path="res://main/lighting.tscn" type="PackedScene" id=3]
 [ext_resource path="res://main/main_camera.tscn" type="PackedScene" id=4]
 [ext_resource path="res://main/player_shape/player_shape.tscn" type="PackedScene" id=5]
-[ext_resource path="res://black_environment.tres" type="Environment" id=6]
-[ext_resource path="res://main/goal_shape/goal_camera.tscn" type="PackedScene" id=7]
-[ext_resource path="res://main/goal_shape/goal_shape.tscn" type="PackedScene" id=8]
+[ext_resource path="res://main/boundary/boundary.tscn" type="PackedScene" id=6]
+[ext_resource path="res://black_environment.tres" type="Environment" id=7]
+[ext_resource path="res://main/goal_shape/goal_camera.tscn" type="PackedScene" id=8]
+[ext_resource path="res://main/goal_shape/goal_shape.tscn" type="PackedScene" id=9]
 
 [sub_resource type="World" id=1]
 
@@ -25,10 +26,13 @@ max_zoom = 7.0
 
 [node name="player_shape" parent="." instance=ExtResource( 5 )]
 
+[node name="boundary" parent="." instance=ExtResource( 6 )]
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = ExtResource( 6 )
+environment = ExtResource( 7 )
 
 [node name="Control2" type="Control" parent="."]
+editor/display_folded = true
 margin_right = 254.0
 margin_bottom = 254.0
 rect_min_size = Vector2( 254, 254 )
@@ -63,15 +67,15 @@ handle_input_locally = false
 render_target_update_mode = 3
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Control2/MarginContainer/Control/ViewportContainer/Viewport"]
-environment = ExtResource( 6 )
+environment = ExtResource( 7 )
 
 [node name="Spatial" type="Spatial" parent="Control2/MarginContainer/Control/ViewportContainer/Viewport"]
 
 [node name="Lighting" parent="Control2/MarginContainer/Control/ViewportContainer/Viewport/Spatial" instance=ExtResource( 3 )]
 
-[node name="goal_camera" parent="Control2/MarginContainer/Control/ViewportContainer/Viewport/Spatial" instance=ExtResource( 7 )]
+[node name="goal_camera" parent="Control2/MarginContainer/Control/ViewportContainer/Viewport/Spatial" instance=ExtResource( 8 )]
 
-[node name="goal_shape" parent="Control2/MarginContainer/Control/ViewportContainer/Viewport/Spatial" instance=ExtResource( 8 )]
+[node name="goal_shape" parent="Control2/MarginContainer/Control/ViewportContainer/Viewport/Spatial" instance=ExtResource( 9 )]
 
 [node name="gizmo" parent="Control2/MarginContainer/Control/ViewportContainer/Viewport/Spatial" instance=ExtResource( 2 )]
 visible = false

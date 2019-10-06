@@ -1,0 +1,75 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://main/boundary/boundary.gd" type="Script" id=1]
+
+[sub_resource type="SpatialMaterial" id=1]
+albedo_color = Color( 1, 0.529412, 0.152941, 1 )
+
+[sub_resource type="CubeMesh" id=2]
+material = SubResource( 1 )
+size = Vector3( 0.05, 0.05, 3 )
+
+[sub_resource type="CubeMesh" id=3]
+material = SubResource( 1 )
+size = Vector3( 0.05, 3, 0.05 )
+
+[sub_resource type="CubeMesh" id=4]
+material = SubResource( 1 )
+size = Vector3( 3, 0.05, 0.05 )
+
+[node name="Spatial" type="Spatial"]
+script = ExtResource( 1 )
+
+[node name="z_borders" type="Spatial" parent="."]
+
+[node name="z1" type="MeshInstance" parent="z_borders"]
+mesh = SubResource( 2 )
+material/0 = null
+
+[node name="z2" type="MeshInstance" parent="z_borders"]
+mesh = SubResource( 2 )
+material/0 = null
+
+[node name="z3" type="MeshInstance" parent="z_borders"]
+mesh = SubResource( 2 )
+material/0 = null
+
+[node name="z4" type="MeshInstance" parent="z_borders"]
+mesh = SubResource( 2 )
+material/0 = null
+
+[node name="y_borders" type="Spatial" parent="."]
+
+[node name="y1" type="MeshInstance" parent="y_borders"]
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="y2" type="MeshInstance" parent="y_borders"]
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="y3" type="MeshInstance" parent="y_borders"]
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="y4" type="MeshInstance" parent="y_borders"]
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="x_borders" type="Spatial" parent="."]
+
+[node name="x1" type="MeshInstance" parent="x_borders"]
+mesh = SubResource( 4 )
+material/0 = null
+
+[node name="x2" type="MeshInstance" parent="x_borders"]
+mesh = SubResource( 4 )
+material/0 = null
+
+[node name="x3" type="MeshInstance" parent="x_borders"]
+mesh = SubResource( 4 )
+material/0 = null
+
+[node name="x4" type="MeshInstance" parent="x_borders"]
+mesh = SubResource( 4 )
+material/0 = null
