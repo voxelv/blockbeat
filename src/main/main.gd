@@ -13,6 +13,7 @@ var size_to_set = shapes_lib.SIZE.THREE
 func _ready():
 	randomize()
 	animation.connect("animation_finished", self, "_on_animation_finished")
+	animation.play("goal_cam_up")
 	next_shape()
 	player_shape.connect("cubes_changed", self, "_on_player_shape_cubes_changed")
 

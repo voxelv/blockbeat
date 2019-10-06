@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://main/main.gd" type="Script" id=1]
 [ext_resource path="res://util/gizmo.tscn" type="PackedScene" id=2]
@@ -9,13 +9,17 @@
 [ext_resource path="res://black_environment.tres" type="Environment" id=7]
 [ext_resource path="res://main/goal_shape/goal_camera.tscn" type="PackedScene" id=8]
 [ext_resource path="res://main/goal_shape/goal_shape.tscn" type="PackedScene" id=9]
+[ext_resource path="res://assets/font/bit5x5.ttf" type="DynamicFontData" id=10]
 
 [sub_resource type="World" id=1]
 
-[sub_resource type="Animation" id=2]
-resource_name = "goal_cam_down"
+[sub_resource type="DynamicFont" id=2]
+size = 12
+font_data = ExtResource( 10 )
+
+[sub_resource type="Animation" id=3]
 tracks/0/type = "value"
-tracks/0/path = NodePath("Control2/MarginContainer/Control/ViewportContainer/Viewport/Spatial/goal_camera:zoom")
+tracks/0/path = NodePath("Control/Control2/MarginContainer/Control/ViewportContainer/Viewport/Spatial/goal_camera:zoom")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -27,10 +31,9 @@ tracks/0/keys = {
 "values": [ 0.9, 50.0 ]
 }
 
-[sub_resource type="Animation" id=3]
-resource_name = "goal_cam_up"
+[sub_resource type="Animation" id=4]
 tracks/0/type = "value"
-tracks/0/path = NodePath("Control2/MarginContainer/Control/ViewportContainer/Viewport/Spatial/goal_camera:zoom")
+tracks/0/path = NodePath("Control/Control2/MarginContainer/Control/ViewportContainer/Viewport/Spatial/goal_camera:zoom")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -62,16 +65,22 @@ visible = false
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource( 7 )
 
-[node name="Control2" type="Control" parent="."]
+[node name="Control" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="Control2" type="Control" parent="Control"]
+editor/display_folded = true
 margin_right = 254.0
 margin_bottom = 254.0
 rect_min_size = Vector2( 254, 254 )
 
-[node name="Panel" type="Panel" parent="Control2"]
+[node name="Panel" type="Panel" parent="Control/Control2"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="MarginContainer" type="MarginContainer" parent="Control2"]
+[node name="MarginContainer" type="MarginContainer" parent="Control/Control2"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_constants/margin_right = 2
@@ -79,59 +88,71 @@ custom_constants/margin_top = 2
 custom_constants/margin_left = 2
 custom_constants/margin_bottom = 2
 
-[node name="Control" type="Control" parent="Control2/MarginContainer"]
+[node name="Control" type="Control" parent="Control/Control2/MarginContainer"]
 margin_left = 2.0
 margin_top = 2.0
 margin_right = 252.0
 margin_bottom = 252.0
 
-[node name="ViewportContainer" type="ViewportContainer" parent="Control2/MarginContainer/Control"]
+[node name="ViewportContainer" type="ViewportContainer" parent="Control/Control2/MarginContainer/Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="Viewport" type="Viewport" parent="Control2/MarginContainer/Control/ViewportContainer"]
+[node name="Viewport" type="Viewport" parent="Control/Control2/MarginContainer/Control/ViewportContainer"]
 size = Vector2( 250, 250 )
 own_world = true
 world = SubResource( 1 )
 handle_input_locally = false
 render_target_update_mode = 3
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="Control2/MarginContainer/Control/ViewportContainer/Viewport"]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Control/Control2/MarginContainer/Control/ViewportContainer/Viewport"]
 environment = ExtResource( 7 )
 
-[node name="Spatial" type="Spatial" parent="Control2/MarginContainer/Control/ViewportContainer/Viewport"]
+[node name="Spatial" type="Spatial" parent="Control/Control2/MarginContainer/Control/ViewportContainer/Viewport"]
 
-[node name="Lighting" parent="Control2/MarginContainer/Control/ViewportContainer/Viewport/Spatial" instance=ExtResource( 3 )]
+[node name="Lighting" parent="Control/Control2/MarginContainer/Control/ViewportContainer/Viewport/Spatial" instance=ExtResource( 3 )]
 
-[node name="goal_camera" parent="Control2/MarginContainer/Control/ViewportContainer/Viewport/Spatial" instance=ExtResource( 8 )]
+[node name="goal_camera" parent="Control/Control2/MarginContainer/Control/ViewportContainer/Viewport/Spatial" instance=ExtResource( 8 )]
 zoom = 0.9
 
-[node name="goal_shape" parent="Control2/MarginContainer/Control/ViewportContainer/Viewport/Spatial" instance=ExtResource( 9 )]
+[node name="goal_shape" parent="Control/Control2/MarginContainer/Control/ViewportContainer/Viewport/Spatial" instance=ExtResource( 9 )]
 
-[node name="gizmo" parent="Control2/MarginContainer/Control/ViewportContainer/Viewport/Spatial" instance=ExtResource( 2 )]
+[node name="gizmo" parent="Control/Control2/MarginContainer/Control/ViewportContainer/Viewport/Spatial" instance=ExtResource( 2 )]
 visible = false
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control2/MarginContainer/Control"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Control2/MarginContainer/Control"]
 editor/display_folded = true
 visible = false
 margin_right = 50.0
 margin_bottom = 50.0
 
-[node name="increase_zoom_button" type="Button" parent="Control2/MarginContainer/Control/VBoxContainer"]
+[node name="increase_zoom_button" type="Button" parent="Control/Control2/MarginContainer/Control/VBoxContainer"]
 margin_right = 50.0
 margin_bottom = 20.0
 focus_mode = 0
 text = "+"
 
-[node name="decrease_zoom_button" type="Button" parent="Control2/MarginContainer/Control/VBoxContainer"]
+[node name="decrease_zoom_button" type="Button" parent="Control/Control2/MarginContainer/Control/VBoxContainer"]
 margin_top = 24.0
 margin_right = 50.0
 margin_bottom = 44.0
 focus_mode = 0
 text = "-"
 
+[node name="Label" type="Label" parent="Control"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 3.0
+margin_top = -45.0
+margin_right = 492.0
+margin_bottom = 3.0
+custom_fonts/font = SubResource( 2 )
+text = "Left Mouse: Place Cube
+Right Mouse: Remove Cube
+Middle Mouse: Orbit Camera"
+
 [node name="animation" type="AnimationPlayer" parent="."]
-anims/goal_cam_down = SubResource( 2 )
-anims/goal_cam_up = SubResource( 3 )
-[connection signal="pressed" from="Control2/MarginContainer/Control/VBoxContainer/increase_zoom_button" to="Control2/MarginContainer/Control/ViewportContainer/Viewport/Spatial/goal_camera" method="_on_increase_zoom_button_pressed"]
-[connection signal="pressed" from="Control2/MarginContainer/Control/VBoxContainer/decrease_zoom_button" to="Control2/MarginContainer/Control/ViewportContainer/Viewport/Spatial/goal_camera" method="_on_decrease_zoom_button_pressed"]
+anims/goal_cam_down = SubResource( 3 )
+anims/goal_cam_up = SubResource( 4 )
+[connection signal="pressed" from="Control/Control2/MarginContainer/Control/VBoxContainer/increase_zoom_button" to="Control/Control2/MarginContainer/Control/ViewportContainer/Viewport/Spatial/goal_camera" method="_on_increase_zoom_button_pressed"]
+[connection signal="pressed" from="Control/Control2/MarginContainer/Control/VBoxContainer/decrease_zoom_button" to="Control/Control2/MarginContainer/Control/ViewportContainer/Viewport/Spatial/goal_camera" method="_on_decrease_zoom_button_pressed"]
